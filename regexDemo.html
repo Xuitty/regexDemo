@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>MatchAll Example</title>
+	</head>
+	<body>
+		INPUT:
+		<div><textarea id="input" type="text" placeholder="Enter text here" style="height: 60px; width: 360px"></textarea></div>
+		COMMAND:
+		<div><textarea id="command" type="text" placeholder="Enter command here" style="height: 60px; width: 360px"></textarea></div>
+		<div id="find">find:</div>
+		<div id="matchAll">Result:</div>
+
+		<script>
+			const input = document.getElementById("input");
+			const command = document.getElementById("command");
+
+			input.addEventListener("keyup", action);
+			command.addEventListener("keyup", action);
+
+			function action() {
+				const value = document.getElementById("input").value;
+
+				const matches = value.matchAll(new RegExp(document.getElementById("command").value, "gm")); // 使用正規表達式 /a/g
+				let positions = []; // 儲存所有索引和匹配值的陣列
+
+				for (const match of matches) {
+					let obj = {};
+					obj.index = match.index; // 匹配字元的索引位置
+					obj.value = match[0]; // 匹配的字元 (即 'a')
+					positions.push(obj); // 將物件推入陣列
+				}
+
+				// 將結果轉換成可讀格式
+				let text = "matchAll : \n";
+				for (const pos of positions) {
+					text += `Index: ${pos.index}, Value: ${pos.value}\n`;
+				}
+
+				// 更新畫面內容
+				document.getElementById("matchAll").innerText = text;
+				document.getElementById("find").innerText = "showFirstPos : \n" + value.search(new RegExp(document.getElementById("command").value, "gm"));
+			}
+		</script>
+	</body>
+</html>

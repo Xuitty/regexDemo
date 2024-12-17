@@ -22,7 +22,7 @@
 			function action() {
 				const value = document.getElementById("input").value;
 
-				const matches = value.matchAll(new RegExp(document.getElementById("command").value, "gm")); // 使用正規表達式 /a/g
+				const matches = value.matchAll(new RegExp(document.getElementById("command").value.trim(), "gm")); // 使用正規表達式 /a/g
 				let positions = []; // 儲存所有索引和匹配值的陣列
 
 				for (const match of matches) {
@@ -39,7 +39,7 @@
 				}
 
 				// 更新畫面內容
-				const found = value.search(new RegExp(document.getElementById("command").value, "gm"));
+				const found = value.search(new RegExp(document.getElementById("command").value.trim(), "gm"));
 				document.getElementById("find").innerText = "find : \n" + (found === -1 ? "Not Found" : found);
 				document.getElementById("matchAll").innerText = positions.length < 1 ? "matchAll : \nNot Found" : text;
 			}

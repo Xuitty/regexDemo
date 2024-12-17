@@ -9,8 +9,8 @@
 		<div><textarea id="input" type="text" placeholder="Enter text here" style="height: 60px; width: 360px"></textarea></div>
 		COMMAND:
 		<div><textarea id="command" type="text" placeholder="Enter command here" style="height: 60px; width: 360px"></textarea></div>
-		<div id="find">find:</div>
-		<div id="matchAll">Result:</div>
+		<div id="find"></div>
+		<div id="matchAll"></div>
 
 		<script>
 			const input = document.getElementById("input");
@@ -39,8 +39,9 @@
 				}
 
 				// 更新畫面內容
-				document.getElementById("matchAll").innerText = text;
-				document.getElementById("find").innerText = "showFirstPos : \n" + value.search(new RegExp(document.getElementById("command").value, "gm"));
+				const found = value.search(new RegExp(document.getElementById("command").value, "gm"));
+				document.getElementById("find").innerText = "find : \n" + (found === -1 ? "Not Found" : found);
+				document.getElementById("matchAll").innerText = positions.length < 1 ? "matchAll : \nNot Found" : text;
 			}
 		</script>
 	</body>
